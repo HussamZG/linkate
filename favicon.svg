@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- خلفية دائرية -->
+  <circle cx="32" cy="32" r="30" fill="#2c3e50" />
+  
+  <!-- رمز الرابط -->
+  <g transform="translate(16, 16) scale(1)">
+    <!-- الجزء الأول من الرابط -->
+    <path d="M13.5,12.5 L20.5,5.5 C23.26,2.74 27.74,2.74 30.5,5.5 C33.26,8.26 33.26,12.74 30.5,15.5 L23.5,22.5" 
+          stroke="#3498db" stroke-width="4" stroke-linecap="round" fill="none" />
+    
+    <!-- الجزء الثاني من الرابط -->
+    <path d="M18.5,17.5 L11.5,24.5 C8.74,27.26 4.26,27.26 1.5,24.5 C-1.26,21.74 -1.26,17.26 1.5,14.5 L8.5,7.5" 
+          stroke="#3498db" stroke-width="4" stroke-linecap="round" fill="none" />
+  </g>
+  
+  <!-- حرف ل باللغة العربية -->
+  <text x="32" y="42" font-family="Tajawal, Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#ecf0f1">لينكاتي</text>
+</svg>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لينكاتي - موقع لحفظ وإدارة الروابط المفضلة">
+    <title>لينكاتي - احفظ روابطك المفضلة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>لينكاتي</h1>
+                <p>احفظ روابطك المفضلة في مكان واحد</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">الرئيسية</a></li>
+                    <li><a href="#about" class="about-link">حول</a></li>
+                    <button class="theme-toggle" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                        <span>الوضع المظلم</span>
+                    </button>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="add-link">
+                <h2>إضافة رابط جديد</h2>
+                <form id="add-link-form">
+                    <div class="form-group">
+                        <label for="url">الرابط</label>
+                        <input type="url" id="url" placeholder="https://example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">العنوان</label>
+                        <input type="text" id="title" placeholder="عنوان الرابط" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">التصنيف</label>
+                        <select id="category">
+                            <option value="general">عام</option>
+                            <option value="work">العمل</option>
+                            <option value="education">التعليم</option>
+                            <option value="entertainment">الترفيه</option>
+                            <option value="social">التواصل الاجتماعي</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">الوصف (اختياري)</label>
+                        <textarea id="description" placeholder="وصف مختصر للرابط"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">إضافة الرابط</button>
+                </form>
+            </div>
+
+            <div class="links-container">
+                <div class="links-header">
+                    <h2>الروابط المحفوظة</h2>
+                    <div class="filter-options">
+                        <select id="category-filter">
+                            <option value="all">جميع التصنيفات</option>
+                            <option value="general">عام</option>
+                            <option value="work">العمل</option>
+                            <option value="education">التعليم</option>
+                            <option value="entertainment">الترفيه</option>
+                            <option value="social">التواصل الاجتماعي</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="search" placeholder="ابحث عن رابط...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="links-grid" id="links-grid"></div>
+            </div>
+        </main>
+
+        <section class="about" id="about">
+            <h2>حول لينكاتي</h2>
+            <p>لينكاتي هو موقع بسيط يساعدك على حفظ وتنظيم روابطك المفضلة في مكان واحد. يمكنك إضافة روابط جديدة، وتصنيفها، والبحث عنها بسهولة.</p>
+            <p>تم تطوير هذا الموقع باستخدام HTML و CSS و JavaScript، ويستخدم التخزين المحلي (Local Storage) لحفظ الروابط على جهازك.</p>
+        </section>
+
+        <footer>
+            <p>جميع الحقوق محفوظة &copy; 2023 - لينكاتي</p>
+        </footer>
+    </div>
+
+    <template id="link-template">
+        <div class="link-card">
+            <div class="link-card-header">
+                <span class="link-date"></span>
+            </div>
+            <h3 class="link-title"></h3>
+            <span class="link-category"></span>
+            <p class="link-description"></p>
+            <div class="link-actions">
+                <a href="#" class="visit-link" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة</a>
+                <button class="edit-link"><i class="fas fa-edit"></i> تعديل</button>
+                <button class="delete-link"><i class="fas fa-trash-alt"></i> حذف</button>
+            </div>
+        </div>
+    </template>
+
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تعديل الرابط</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-url">الرابط</label>
+                    <input type="url" id="edit-url" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-title">العنوان</label>
+                    <input type="text" id="edit-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-category">التصنيف</label>
+                    <select id="edit-category">
+                        <option value="general">عام</option>
+                        <option value="work">العمل</option>
+                        <option value="education">التعليم</option>
+                        <option value="entertainment">الترفيه</option>
+                        <option value="social">التواصل الاجتماعي</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-description">الوصف (اختياري)</label>
+                    <textarea id="edit-description"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">حفظ التغييرات</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="delete-confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تأكيد الحذف</h2>
+                <span class="close-modal" id="close-delete-modal">&times;</span>
+            </div>
+            <p class="delete-message">هل أنت متأكد من حذف هذا الرابط؟</p>
+            <div class="delete-actions">
+                <button class="btn-primary btn-cancel" id="cancel-delete">إلغاء</button>
+                <button class="btn-danger" id="confirm-delete">حذف</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
